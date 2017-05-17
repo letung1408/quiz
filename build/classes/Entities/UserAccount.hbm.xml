@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2017 5:10:38 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entities.UserAccount" table="UserAccount" schema="dbo" catalog="ApexProject" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="role" class="Entities.Role" fetch="select">
+            <column name="RoleId" />
+        </many-to-one>
+        <many-to-one name="specialitie" class="Entities.Specialitie" fetch="select">
+            <column name="SpecialitiesID" />
+        </many-to-one>
+        <many-to-one name="subject" class="Entities.Subject" fetch="select">
+            <column name="SubjectID" />
+        </many-to-one>
+        <property name="username" type="string">
+            <column name="Username" length="225" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="Password" not-null="true" />
+        </property>
+        <property name="fisrtName" type="string">
+            <column name="FisrtName" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="LastName" />
+        </property>
+        <property name="gender" type="java.lang.Boolean">
+            <column name="Gender" />
+        </property>
+        <property name="email" type="string">
+            <column name="Email" length="225" not-null="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="Address" />
+        </property>
+        <property name="phone" type="string">
+            <column name="Phone" length="50" />
+        </property>
+        <property name="birthDay" type="date">
+            <column name="BirthDay" length="10" />
+        </property>
+        <set name="exams" table="Exam" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CreatedBy" />
+            </key>
+            <one-to-many class="Entities.Exam" />
+        </set>
+        <set name="studentExams" table="StudentExam" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UserID" />
+            </key>
+            <one-to-many class="Entities.StudentExam" />
+        </set>
+    </class>
+</hibernate-mapping>

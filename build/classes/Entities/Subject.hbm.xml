@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2017 5:10:38 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entities.Subject" table="Subject" schema="dbo" catalog="ApexProject" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="course" class="Entities.Course" fetch="select">
+            <column name="CourseID" />
+        </many-to-one>
+        <many-to-one name="semester" class="Entities.Semester" fetch="select">
+            <column name="SemesterID" />
+        </many-to-one>
+        <many-to-one name="specialitie" class="Entities.Specialitie" fetch="select">
+            <column name="SpecialitiesID" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="Name" />
+        </property>
+        <set name="questions" table="Question" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SubjectID" />
+            </key>
+            <one-to-many class="Entities.Question" />
+        </set>
+        <set name="exams" table="Exam" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SubjectsID" />
+            </key>
+            <one-to-many class="Entities.Exam" />
+        </set>
+        <set name="userAccounts" table="UserAccount" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SubjectID" />
+            </key>
+            <one-to-many class="Entities.UserAccount" />
+        </set>
+    </class>
+</hibernate-mapping>

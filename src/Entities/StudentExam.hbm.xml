@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2017 5:10:38 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entities.StudentExam" table="StudentExam" schema="dbo" catalog="ApexProject" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="exam" class="Entities.Exam" fetch="select">
+            <column name="ExamsID" />
+        </many-to-one>
+        <many-to-one name="examsQuestion" class="Entities.ExamsQuestion" fetch="select">
+            <column name="QuestionID" />
+        </many-to-one>
+        <many-to-one name="userAccount" class="Entities.UserAccount" fetch="select">
+            <column name="UserID" />
+        </many-to-one>
+        <property name="answerId" type="java.lang.Integer">
+            <column name="AnswerID" />
+        </property>
+    </class>
+</hibernate-mapping>

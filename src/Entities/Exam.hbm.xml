@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2017 5:10:38 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entities.Exam" table="Exam" schema="dbo" catalog="ApexProject" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="examination" class="Entities.Examination" fetch="select">
+            <column name="ExaminationID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="subject" class="Entities.Subject" fetch="select">
+            <column name="SubjectsID" />
+        </many-to-one>
+        <many-to-one name="userAccount" class="Entities.UserAccount" fetch="select">
+            <column name="CreatedBy" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="Name" />
+        </property>
+        <property name="duration" type="java.lang.Double">
+            <column name="Duration" precision="53" scale="0" />
+        </property>
+        <property name="status" type="java.lang.Boolean">
+            <column name="Status" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="CreateTime" length="23" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UpdateTime" length="23" />
+        </property>
+        <set name="examsQuestions" table="ExamsQuestion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ExamsID" />
+            </key>
+            <one-to-many class="Entities.ExamsQuestion" />
+        </set>
+        <set name="studentExams" table="StudentExam" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ExamsID" />
+            </key>
+            <one-to-many class="Entities.StudentExam" />
+        </set>
+    </class>
+</hibernate-mapping>

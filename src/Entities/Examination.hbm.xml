@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2017 5:10:38 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entities.Examination" table="Examination" schema="dbo" catalog="ApexProject" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="name" type="string">
+            <column name="Name" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="Description" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="CreateTime" length="23" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UpdateTime" length="23" />
+        </property>
+        <set name="exams" table="Exam" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ExaminationID" not-null="true" />
+            </key>
+            <one-to-many class="Entities.Exam" />
+        </set>
+    </class>
+</hibernate-mapping>
